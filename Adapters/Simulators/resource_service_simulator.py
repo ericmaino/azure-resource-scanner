@@ -45,3 +45,9 @@ class ResourceServiceSimulator(ResourceService):
                 'location': 'southcentralus',
                 'kind': 'functionapp'
                 }]
+
+    def get_filter(self, payload):
+        return None
+    
+    def update_resource(self, resource):
+        return None

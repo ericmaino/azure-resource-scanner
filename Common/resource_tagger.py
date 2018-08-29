@@ -19,16 +19,18 @@ class ResourceTagger:
         
         # Tag the resource
         tags_written = 0
+        tags_skipped = 0
         for tag_key, tag_value in self._tags.items():
             if not overwrite and tag_key in resource['tags']:
                 logging.info(f"Skipped tagging {resource['id']} with tag {tag_key} since it already exists.")
+                tags_skipped += 1
                 continue
             resource['tags'][tag_key] = tag_value
             tags_written += 1
         
-        # Skip saving if nothing was written
-        if tags_written == 0:
-            return
+        # Only save if needed
+        if tags_written > 0:
+            self._resource_service.update_resource(resource)
+            logging.info(f"Wrote {tags_written} tags to {resource['id']}.")
 
-        self._resource_service.update_resource(resource)
-        logging.info(f"Wrote {tags_written} tags to {resource['id']}.")
+        return tags_written, tags_skipped
