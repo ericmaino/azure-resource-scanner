@@ -1,18 +1,16 @@
 import json
 import logging
 
-import mock
-
 from Adapters.Azure import AzureConfig, AzureServiceFactory, AzureResourceService
-from Adapters.Simulators import ResourceServiceSimulator
+from Adapters.Simulators import ServiceFactorySimulator
 from Common import ResourceTagger
 from Common.Contracts import ResourceService
 from Common.Test import TestCase
 
 class ResourceScannerTest(TestCase):
 
-    def _get_resource_service(self):
-        return ResourceServiceSimulator()
+    def _get_factory(self):
+        return ServiceFactorySimulator()
 
     def test_scanner_multiple_write(self):
         target_tags = {
@@ -20,8 +18,9 @@ class ResourceScannerTest(TestCase):
             'tag2': 'value'
         }
 
-        resource_service : ResourceService = self._get_resource_service()
-        resource_tagger = ResourceTagger(resource_service, target_tags, True)
+        factory = self._get_factory()
+        resource_service = factory.resource_service(None)
+        resource_tagger = ResourceTagger(factory, target_tags, True)
 
         resource = resource_service.get_resources()[0]
         resource['tags'] = dict()
@@ -40,8 +39,9 @@ class ResourceScannerTest(TestCase):
         target_tags = dict()
         target_tags[test_tag_name] = test_tag_value
         
-        resource_service : ResourceService = self._get_resource_service()
-        resource_tagger = ResourceTagger(resource_service, target_tags, True)
+        factory = self._get_factory()
+        resource_service = factory.resource_service(None)
+        resource_tagger = ResourceTagger(factory, target_tags, True)
 
         resource = resource_service.get_resources()[0]
 
