@@ -1,9 +1,10 @@
 import logging
-from Common.Contracts import ResourceService
+from Common.Helpers import ResourceExtractors
+from Common.Contracts import ServiceFactory
 
 class ResourceTagger:
-    def __init__(self, resource_service:ResourceService, tags:dict, overwrite=True):
-        self._resource_service = resource_service
+    def __init__(self, factory:ServiceFactory, tags:dict, overwrite=True):
+        self._factory = factory
         self._tags = tags
         self._overwrite = overwrite
     
@@ -30,7 +31,8 @@ class ResourceTagger:
         
         # Only save if needed
         if tags_written > 0:
-            self._resource_service.update_resource(resource)
+            subscription_id = ResourceExtractors.get_subscription(resource['id'])
+            self._factory.resource_service(subscription_id).update_resource(resource)
             logging.info(f"Wrote {tags_written} tags to {resource['id']}.")
 
         return tags_written, tags_skipped
