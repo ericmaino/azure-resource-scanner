@@ -30,7 +30,7 @@ def generate_config(types, output=None):
     azure_config = AzureConfig(Config())
     azure_factory = AzureServiceFactory(azure_config)
     subscriptions = []
-    sub_service = azure_factory.subscription_service()
+    sub_service = azure_factory.account_service()
     for sub in sub_service.get_accounts():
         subscriptions.append({
             'subscriptionId': sub['subscriptionId'],
@@ -42,7 +42,7 @@ def generate_config(types, output=None):
         resource_types.append({
             'typeName': t
         })
-    create_blob(json.dumps(
+    create_blob(azure_factory, json.dumps(
         {'subscriptions': subscriptions,
          'resourceTypes': resource_types})
     )
