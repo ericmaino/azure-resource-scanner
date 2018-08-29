@@ -7,12 +7,8 @@ import click
 
 from Adapters.Azure.azure_service_factory import AzureServiceFactory
 
-config = Config()
-azure_config = AzureConfig(config)
-azure_factory = AzureServiceFactory(azure_config)
 
-
-def create_blob(json):
+def create_blob(azure_factory, json):
     blob_name = 'config-{date:%Y-%m-%d-%H-%M-%S}.json'.format(date=datetime.now())
     config_container = azure_factory.config_container()
     config_container.upload_text(blob_name, json)
@@ -31,9 +27,11 @@ def generate_config(types, output=None):
     """
     Generate a c7n-org subscriptions config file
     """
+    azure_config = AzureConfig(Config())
+    azure_factory = AzureServiceFactory(azure_config)
     subscriptions = []
     sub_service = azure_factory.subscription_service()
-    for sub in sub_service.get_subscriptions():
+    for sub in sub_service.get_accounts():
         subscriptions.append({
             'subscriptionId': sub['subscriptionId'],
             'displayName': sub['displayName']

@@ -1,12 +1,12 @@
-from Common.Contracts.subscription_service import SubscriptionService
+from Common.Contracts.account_service import AccountService
 from azure.mgmt.resource.subscriptions import SubscriptionClient
-from .Config import AzureResourceServiceConfig
+from .Config import AzureCredentialConfig
 
 
-class AzureSubscriptionService(SubscriptionService):
+class AzureSubscriptionService(AccountService):
 
-    def __init__(self, config:AzureResourceServiceConfig):
-        self._client = SubscriptionClient(config.CREDENTIALS)
+    def __init__(self, config:AzureCredentialConfig):
+        self._client = SubscriptionClient(config.get_credentials())
 
-    def get_subscriptions(self):
+    def get_accounts(self):
         return [sub.serialize(True) for sub in self._client.subscriptions.list()]
