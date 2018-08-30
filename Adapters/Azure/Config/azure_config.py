@@ -47,4 +47,3 @@ class AzureConfig:
 
     def get_config_container_name(self):
         return self._config.get_property('AZURE_CONFIG_CONTAINER')
-

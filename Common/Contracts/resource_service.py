@@ -13,3 +13,7 @@ class ResourceService(ABC):
     @abstractmethod
     def get_filter(self, payload) -> ResourceFilter:
         raise NotImplementedError('get_filter is not implemented')
+
+    @abstractmethod
+    def update_resource(self, resource):
+        raise NotImplementedError("update_resource is not implemented")

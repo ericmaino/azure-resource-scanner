@@ -11,6 +11,7 @@ class AzureServiceFactory(ServiceFactory):
 
     def __init__(self, config:AzureConfig):
         self._config = config
+        self._resource_services = dict()
 
     def table_storage(self):
         return AzureCosmosDb(self._config.get_cosmos_storage_config())
@@ -20,8 +21,13 @@ class AzureServiceFactory(ServiceFactory):
             self._config.get_queue_name(),
             self._config.get_storage_config())
 
-    def resource_service(self, subscription_id):
+    def _create_resource_service(self, subscription_id):
         return AzureResourceService(self._config.get_resource_config(subscription_id))
+    
+    def resource_service(self, subscription_id):
+        if subscription_id not in self._resource_services:
+            self._resource_services[subscription_id] = self._create_resource_service(subscription_id)
+        return self._resource_services[subscription_id]
 
     def account_service(self):
         return AzureSubscriptionService(self._config.get_credential_config())
@@ -31,3 +37,4 @@ class AzureServiceFactory(ServiceFactory):
 
     def config_generator(self):
         return AzureConfigGenerator(self.account_service())
+

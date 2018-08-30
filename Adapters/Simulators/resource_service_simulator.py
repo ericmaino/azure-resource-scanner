@@ -48,5 +48,10 @@ class ResourceServiceSimulator(ResourceService):
                 'kind': 'functionapp'
                 }]
 
+
+    def update_resource(self, resource):
+        return None
+
     def get_filter(self, payload) -> ResourceFilter:
         pass
+
