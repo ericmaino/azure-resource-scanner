@@ -4,6 +4,7 @@ import logging
 from Adapters.Azure import AzureConfig,AzureServiceFactory
 from Common import ResourceScanner, Config
 from Common.Contracts import Queue
+from Adapters.Simulators import ServiceFactorySimulator
 
 class LoggingQueue(Queue):
     def push(self, message):
@@ -20,7 +21,5 @@ def test_scanner():
         "subscriptionId" : "808b8977-950a-4a96-8229-b48d708aa455",
         "typeName" : "storage"
     }
-    config = Config()
-    azureConfig = AzureConfig(config)
-    factory = AzureServiceFactory(azureConfig)
+    factory = ServiceFactorySimulator()
     ResourceScanner(factory, LoggingQueue()).execute(data)
