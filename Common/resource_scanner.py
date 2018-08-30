@@ -1,6 +1,7 @@
 import logging
 from Common.Contracts import ServiceFactory, Queue
 
+
 class ResourceScanner:
     def __init__(self, factory:ServiceFactory, outputQueue:Queue):
         self._factory = factory

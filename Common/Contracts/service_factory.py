@@ -19,3 +19,10 @@ class ServiceFactory(ABC):
     def account_service(self):
         raise NotImplementedError("account_service is not implemented")
 
+    @abstractmethod
+    def config_container(self):
+        raise NotImplementedError("account_service is not implemented")
+
+    @abstractmethod
+    def config_generator(self):
+        raise NotImplementedError("account_service is not implemented")

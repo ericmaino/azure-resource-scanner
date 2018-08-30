@@ -1,7 +1,9 @@
-from Common.Contracts import ResourceService
+from Common.Contracts import ResourceService, ResourceFilter
+
 
 class ResourceServiceSimulator(ResourceService):
-    def get_resources(self):
+
+    def get_resources(self, filter: ResourceFilter=None):
         return [{
                 'id': '/subscriptions/808b8977-950a-4a96-8229-b48d708aa455/resourceGroups/ericmai-vsts-devcrews-teams/providers/microsoft.insights/components/devcrewengnot',
                 'name': 'devcrewengnot',
@@ -46,8 +48,10 @@ class ResourceServiceSimulator(ResourceService):
                 'kind': 'functionapp'
                 }]
 
-    def get_filter(self, payload):
-        return None
-    
+
     def update_resource(self, resource):
         return None
+
+    def get_filter(self, payload) -> ResourceFilter:
+        pass
+

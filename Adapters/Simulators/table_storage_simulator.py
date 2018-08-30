@@ -4,11 +4,12 @@ import uuid
 
 from Common.Contracts import TableStorage
 
+
 class TableStorageSimulator(TableStorage):
 
     def __init__(self):
         self._data = dict()
-        
+
     def prepare_entry_for_insert(self, json_entry):
 
         # using location as the partition key. This will keep all the data from
@@ -33,7 +34,7 @@ class TableStorageSimulator(TableStorage):
     def write(self, entry):
         prepared = self.prepare_entry_for_insert(entry)
         key = entry['PartitionKey'] + '-' + entry['RowKey']
-        self._data[key] = entry 
+        self._data[key] = entry
 
     def query(self, partitionkey, rowkey):
         task = self._data[partitionkey + '-' + rowkey]
