@@ -17,5 +17,11 @@ class AzureStorageContainer(Common.Contracts.StorageContainer):
     def upload_text(self, blob_name, text):
         self._blob_service.create_blob_from_text(self._container_name, blob_name, text)
 
+    def list_blobs(self):
+        return self._blob_service.list_blobs(self._container_name)
+
+    def get_blob_to_text(self, file_name):
+        return self._blob_service.get_blob_to_text(self._container_name, file_name)
+
 
 

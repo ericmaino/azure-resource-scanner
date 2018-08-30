@@ -1,6 +1,6 @@
 import json
 import azure.functions
-from Adapters.Azure import AzureConfig,AzureServiceFactory
+from Adapters.Azure import AzureConfig, AzureServiceFactory
 from Common import ResourceScanner, Config
 
 def read_as_json(msg: azure.functions.QueueMessage):

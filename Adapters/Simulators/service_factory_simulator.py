@@ -1,5 +1,6 @@
 from Common.Contracts import ServiceFactory
 from . import TableStorageSimulator, ResourceServiceSimulator
+from .container_storage_simulator import MockBlobStorageSimulator
 
 
 class ServiceFactorySimulator(ServiceFactory):
@@ -17,7 +18,7 @@ class ServiceFactorySimulator(ServiceFactory):
         raise NotImplementedError("queue is not implemented")
 
     def config_container(self):
-        raise NotImplementedError("config_container is not implemented")
+        return MockBlobStorageSimulator()
 
     def config_generator(self):
         raise NotImplementedError("config_generator is not implemented")

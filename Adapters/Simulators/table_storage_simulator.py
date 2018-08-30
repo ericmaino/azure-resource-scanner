@@ -1,5 +1,4 @@
 import json
-import os
 import uuid
 
 from Common.Contracts import TableStorage
@@ -34,7 +33,7 @@ class TableStorageSimulator(TableStorage):
     def write(self, entry):
         prepared = self.prepare_entry_for_insert(entry)
         key = entry['PartitionKey'] + '-' + entry['RowKey']
-        self._data[key] = entry
+        self._data[key] = prepared
 
     def query(self, partitionkey, rowkey):
         task = self._data[partitionkey + '-' + rowkey]

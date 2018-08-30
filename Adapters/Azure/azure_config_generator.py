@@ -2,8 +2,6 @@ from Common.Contracts import ConfigGenerator
 from .azure_subscription_service import AzureSubscriptionService
 import json
 from datetime import datetime
-from .Config import AzureConfig
-from Common import Config
 
 
 class AzureConfigGenerator(ConfigGenerator):

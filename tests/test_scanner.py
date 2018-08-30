@@ -1,8 +1,6 @@
-import json
-import azure.functions
 import logging
-from Adapters.Azure import AzureConfig,AzureServiceFactory
-from Common import ResourceScanner, Config
+
+from Common import ResourceScanner
 from Common.Contracts import Queue
 from Adapters.Simulators import ServiceFactorySimulator
 
