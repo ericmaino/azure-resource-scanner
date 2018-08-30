@@ -10,8 +10,12 @@ class ServiceFactory(ABC):
     @abstractmethod
     def queue(self, name):
         raise NotImplementedError("queue is not implemented")
-    
+
     @abstractmethod
     def resource_service(self, subscription_id) -> ResourceService:
         raise NotImplementedError("resource_service is not implemented")
+
+    @abstractmethod
+    def account_service(self):
+        raise NotImplementedError("account_service is not implemented")
 

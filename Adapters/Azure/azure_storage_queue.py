@@ -3,6 +3,7 @@ import Common
 from azure.storage.queue import QueueService, QueueMessageFormat
 from .Config import AzureStorageConfig
 
+
 class AzureStorageQueue(Common.Contracts.Queue):
 
     def __init__(self, queue_name, config:AzureStorageConfig):

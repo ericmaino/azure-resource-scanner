@@ -10,7 +10,7 @@ class NoFilter(ResourceFilter):
 class AzureResourceTypeFilter(ResourceFilter):
     def __init__(self, resourceType):
         self._filter = "resourceType eq '" + resourceType + "'"
-    
+
     def normalized_filter(self):
         return self._filter
 
@@ -24,10 +24,10 @@ class AzureResourceService(ResourceService):
             'storage' : 'Microsoft.Storage/storageAccounts'
         }
 
-    def get_resources(self, filter:ResourceFilter):
+    def get_resources(self, filter:ResourceFilter=None):
         result = [resource.serialize(True) for resource in self._client.resources.list(expand="tags", filter=filter.normalized_filter())]
         return result
-    
+
     def get_filter(self, payload):
         try:
             resourceType = self._knownTypes[payload.lower()]
@@ -35,9 +35,9 @@ class AzureResourceService(ResourceService):
         except AttributeError:
             return NoFilter()
         except KeyError:
-            logging.warn("The filter " + payload + " is not supported and will be ignored")
-            return NoFilter()            
-        else:
+            logging.warning("The filter " + payload + " is not supported and will be ignored")
+            return NoFilter()
+        except Exception:
             raise NotImplementedError("The payload " + payload + " is not a supported filter")
     
     def update_resource(self, resource):
