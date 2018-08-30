@@ -1,5 +1,4 @@
 from Common.Contracts import ServiceFactory
-from Adapters.Azure.Config import AzureConfig
 from . import TableStorageSimulator, ResourceServiceSimulator
 
 
