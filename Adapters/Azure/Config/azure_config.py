@@ -10,7 +10,7 @@ class AzureConfig:
     def __init__(self, config:Config):
         self._config = config
 
-    def get_credentials(self):
+    def get_credential_config(self):
         return AzureCredentialConfig(
             self._config.get_property('AZURE_CLIENT_ID'),
             self._config.get_property('AZURE_TENANT_ID'),
@@ -20,12 +20,12 @@ class AzureConfig:
     def get_resource_config(self, subscription_id):
         return AzureResourceServiceConfig(
             subscription_id,
-            self.get_credentials()
+            self.get_credential_config()
         )
 
     def get_subscription_config(self):
         return AzureSubscriptionServiceConfig(
-            self.get_credentials()
+            self.get_credential_config()
         )
 
     def get_storage_config(self):
