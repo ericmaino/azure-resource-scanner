@@ -8,7 +8,6 @@ from .azure_config_generator import AzureConfigGenerator
 from .Config import AzureConfig
 
 
-
 class AzureServiceFactory(ServiceFactory):
 
     def __init__(self, config: AzureConfig):
@@ -16,12 +15,12 @@ class AzureServiceFactory(ServiceFactory):
         self._resource_services = dict()
 
     def table_storage(self):
-        return AzureCosmosDb(self._config.get_cosmos_storage_config())
+        return AzureCosmosDb(self._config.cosmos_storage_config)
 
     def queue(self, name):
         return AzureStorageQueue(
             name,
-            self._config.get_storage_config())
+            self._config.storage_config)
 
     def _create_resource_service(self, subscription_id):
         return AzureResourceService(self._config.get_resource_config(subscription_id))
@@ -32,10 +31,10 @@ class AzureServiceFactory(ServiceFactory):
         return self._resource_services[subscription_id]
 
     def account_service(self):
-        return AzureSubscriptionService(self._config.get_credential_config())
+        return AzureSubscriptionService(self._config.credential_config)
 
     def config_container(self):
-        return AzureStorageContainer(self._config.get_config_container_name(), self._config.get_storage_config())
+        return AzureStorageContainer(self._config.config_container_name, self._config.storage_config)
 
     def config_generator(self):
         return AzureConfigGenerator(self.account_service())

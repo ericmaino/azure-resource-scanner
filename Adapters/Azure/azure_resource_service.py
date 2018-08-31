@@ -21,7 +21,7 @@ class AzureResourceTypeFilter(ResourceFilter):
 
 class AzureResourceService(ResourceService):
     def __init__(self, config: AzureResourceServiceConfig):
-        self._client = ResourceManagementClient(config.CREDENTIALS, config.SUBSCRIPTION_ID)
+        self._client = ResourceManagementClient(config.credentials, config.subscription_id)
         self._resource_type_apis = dict()
 
         self._knownTypes = {

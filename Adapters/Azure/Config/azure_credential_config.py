@@ -7,7 +7,8 @@ class AzureCredentialConfig:
         self.secret = secret
         self.tenant = tenant
 
-    def get_credentials(self):
+    @property
+    def credentials(self):
         return ServicePrincipalCredentials(
             self.clientId,
             self.secret,
