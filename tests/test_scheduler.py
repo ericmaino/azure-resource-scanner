@@ -2,8 +2,6 @@ from Adapters.Simulators import ServiceFactorySimulator
 from Common.Test import TestCase
 from Common import scheduler
 
-import  logging
-
 class test_scheduler(TestCase):
     def test_latest_config_is_picked(self):
 
