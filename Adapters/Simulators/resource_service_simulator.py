@@ -1,10 +1,10 @@
 from Common.Contracts import ResourceService, ResourceFilter
+from Adapters.Azure import AzureResource
 
 
 class ResourceServiceSimulator(ResourceService):
 
-    def get_resources(self, filter: ResourceFilter=None):
-        return [{
+    resources = [{
                 'id': '/subscriptions/808b8977-950a-4a96-8229-b48d708aa455/resourceGroups/ericmai-vsts-devcrews-teams/providers/microsoft.insights/components/devcrewengnot',
                 'name': 'devcrewengnot',
                 'type': 'microsoft.insights/components',
@@ -47,6 +47,9 @@ class ResourceServiceSimulator(ResourceService):
                 'location': 'southcentralus',
                 'kind': 'functionapp'
                 }]
+
+    def get_resources(self, filter: ResourceFilter=None):
+        return [AzureResource(resource) for resource in self.resources]
 
 
     def update_resource(self, resource):

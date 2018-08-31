@@ -23,7 +23,6 @@ class ResourceScannerTest(TestCase):
         resource_tagger = ResourceTagger(factory, target_tags, True)
 
         resource = resource_service.get_resources()[0]
-        resource['tags'] = dict()
 
         tags_written, tags_skipped = resource_tagger.execute(resource)
 
@@ -38,7 +37,7 @@ class ResourceScannerTest(TestCase):
 
         target_tags = dict()
         target_tags[test_tag_name] = test_tag_value
-        
+
         factory = self._get_factory()
         resource_service = factory.resource_service(None)
         resource_tagger = ResourceTagger(factory, target_tags, True)
@@ -47,22 +46,22 @@ class ResourceScannerTest(TestCase):
 
         ### Test does overwrite
 
-        resource['tags'] = target_tags.copy()
-        resource['tags'][test_tag_name] = test_tag_default_value
+        resource.tags = target_tags.copy()
+        resource.tags[test_tag_name] = test_tag_default_value
 
         tags_written, tags_skipped = resource_tagger.execute(resource)
 
         assert(tags_written == 1)
         assert(tags_skipped == 0)
-        assert(resource['tags'][test_tag_name] == test_tag_value)
+        assert(resource.tags[test_tag_name] == test_tag_value)
 
         ### Test does not overwrite
 
-        resource['tags'] = target_tags.copy()
-        resource['tags'][test_tag_name] = test_tag_default_value
+        resource.tags = target_tags.copy()
+        resource.tags[test_tag_name] = test_tag_default_value
 
         tags_written, tags_skipped = resource_tagger.execute(resource, False)
 
         assert(tags_written == 0)
         assert(tags_skipped == 1)
-        assert(resource['tags'][test_tag_name] == test_tag_default_value)
+        assert(resource.tags[test_tag_name] == test_tag_default_value)
