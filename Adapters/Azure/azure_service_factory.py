@@ -8,6 +8,7 @@ from .azure_config_generator import AzureConfigGenerator
 from .Config import AzureConfig
 
 
+
 class AzureServiceFactory(ServiceFactory):
 
     def __init__(self, config:AzureConfig):
@@ -19,7 +20,7 @@ class AzureServiceFactory(ServiceFactory):
 
     def queue(self, name):
         return AzureStorageQueue(
-            self._config.get_queue_name(name),
+            name,
             self._config.get_storage_config())
 
     def _create_resource_service(self, subscription_id):

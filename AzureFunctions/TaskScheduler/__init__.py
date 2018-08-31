@@ -19,7 +19,7 @@ def main(timer: azure.functions.TimerRequest):
 
     tasks = create_tasks(config)
 
-    queue_service = factory.queue('AZURE_STORAGE_QUEUE_NAME')
+    queue_service = factory.queue(azure_config.get_task_queue_name())
 
     for task in tasks:
         logging.warning("Pushing task %s", str(task))

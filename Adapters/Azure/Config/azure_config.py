@@ -42,8 +42,11 @@ class AzureConfig:
                 self._config.get_property('AZURE_COSMOS_KEY')
             ))
 
-    def get_queue_name(self, queue_alias):
-        return self._config.get_property(queue_alias)
+    def get_task_queue_name(self):
+        return self._config.get_property('AZURE_TASK_QUEUE_NAME')
+
+    def get_payload_queue_name(self):
+        return self._config.get_property('AZURE_PAYLOAD_QUEUE_NAME')
 
     def get_config_container_name(self):
         return self._config.get_property('AZURE_CONFIG_CONTAINER')

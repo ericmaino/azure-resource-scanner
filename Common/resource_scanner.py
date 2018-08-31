@@ -1,5 +1,6 @@
 import logging
 from Common.Contracts import ServiceFactory, Queue
+import json
 
 
 class ResourceScanner:
@@ -19,4 +20,4 @@ class ResourceScanner:
 
         if self._queue:
             for resource in resources:
-                self._queue.push(resource)
+                self._queue.push(json.dumps(resource.to_dict()))
