@@ -1,4 +1,6 @@
-import json, uuid
+import json
+import uuid
+
 
 class EntryOperations:
     @staticmethod

@@ -1,6 +1,7 @@
 from Common.Contracts import TableStorage
 from Common.Helpers import entry_storage
 
+
 class TableStorageSimulator(TableStorage):
 
     def __init__(self):

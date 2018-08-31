@@ -5,6 +5,7 @@ from Common import ResourceTagger, Config
 
 from azure.functions import QueueMessage
 
+
 def parse_message(msg):
         logging.info(f"Processing queue message {msg.id}")
 
@@ -16,6 +17,7 @@ def parse_message(msg):
         logging.info(f"Found {len(resource_list)} resources to process")
 
         return resource_list
+
 
 def main(msg : QueueMessage):
     config = Config()

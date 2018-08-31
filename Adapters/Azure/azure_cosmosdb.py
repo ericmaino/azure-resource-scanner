@@ -3,12 +3,13 @@ from Common.Contracts import TableStorage
 from .Config import AzureCosmosDbConfig
 from Common.Helpers import entry_storage
 
+
 class AzureCosmosDb(TableStorage):
 
     def __init__(self, config:AzureCosmosDbConfig):
         self._tableService = TableService(account_name=config.account_name, account_key=config.account_key)
         self._tableName = config.table_name
-    
+
     def check_entry_exists(self, entry):
         try:
             self.query(entry['PartitionKey'], entry['RowKey'])

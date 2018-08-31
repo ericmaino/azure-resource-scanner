@@ -1,6 +1,7 @@
 import json
 import logging
 
+
 def create_tasks(config):
 
     tasks = []
@@ -28,6 +29,7 @@ def create_tasks(config):
             tasks.append(message)
 
     return tasks
+
 
 def read_config_from_blob(blob_service):
 

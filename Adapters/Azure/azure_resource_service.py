@@ -5,19 +5,22 @@ from .azure_resource import AzureResource
 
 import logging
 
+
 class NoFilter(ResourceFilter):
     def normalized_filter(self):
         return None
 
+
 class AzureResourceTypeFilter(ResourceFilter):
-    def __init__(self, resourceType):
-        self._filter = "resourceType eq '" + resourceType + "'"
+    def __init__(self, resource_type):
+        self._filter = "resourceType eq '" + resource_type + "'"
 
     def normalized_filter(self):
         return self._filter
 
+
 class AzureResourceService(ResourceService):
-    def __init__(self, config:AzureResourceServiceConfig):
+    def __init__(self, config: AzureResourceServiceConfig):
         self._client = ResourceManagementClient(config.CREDENTIALS, config.SUBSCRIPTION_ID)
         self._resource_type_apis = dict()
 
@@ -26,14 +29,14 @@ class AzureResourceService(ResourceService):
             'storage' : 'Microsoft.Storage/storageAccounts'
         }
 
-    def get_resources(self, filter:ResourceFilter=None):
+    def get_resources(self, filter: ResourceFilter=None):
         resources = self._client.resources.list(expand="tags", filter=filter.normalized_filter())
         return [AzureResource(resource.serialize(True)) for resource in resources]
 
     def get_filter(self, payload):
         try:
-            resourceType = self._knownTypes[payload.lower()]
-            return AzureResourceTypeFilter(resourceType)
+            resource_type = self._knownTypes[payload.lower()]
+            return AzureResourceTypeFilter(resource_type)
         except AttributeError:
             return NoFilter()
         except KeyError:
@@ -48,7 +51,6 @@ class AzureResourceService(ResourceService):
             raise Exception(f"Unabled to find api version to update {resource['id']}")
 
         self._client.resources.update_by_id(resource['id'], api_version, resource)
-
 
     # Internal Helper function to resolve API version to access Azure with
     def _resolve_api_for_resource_type(self, resource_type):

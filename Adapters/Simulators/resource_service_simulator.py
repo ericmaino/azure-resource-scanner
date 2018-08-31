@@ -51,7 +51,6 @@ class ResourceServiceSimulator(ResourceService):
     def get_resources(self, filter: ResourceFilter=None):
         return [AzureResource(resource) for resource in self.resources]
 
-
     def update_resource(self, resource):
         return None
 

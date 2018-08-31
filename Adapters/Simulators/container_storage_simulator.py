@@ -2,7 +2,8 @@ import logging
 
 from Common.Contracts import StorageContainer
 
-class MockBlobStorageOutput():
+
+class MockBlobStorageOutput:
     def __init__(self, name, content):
         self._name = name
         self._content = str(content)
@@ -14,6 +15,7 @@ class MockBlobStorageOutput():
     @property
     def content(self):
         return self._content
+
 
 class MockBlobStorageSimulator(StorageContainer):
     def __init__(self):

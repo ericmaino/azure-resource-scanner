@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class QueueService(ABC):
 
     @abstractmethod

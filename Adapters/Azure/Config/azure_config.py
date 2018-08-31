@@ -3,11 +3,10 @@ from . import AzureResourceServiceConfig
 from . import AzureCredentialConfig
 from . import AzureStorageConfig
 from . import AzureCosmosDbConfig
-from .azure_subscription_config import AzureSubscriptionServiceConfig
 
 
 class AzureConfig:
-    def __init__(self, config:Config):
+    def __init__(self, config: Config):
         self._config = config
 
     def get_credential_config(self):
@@ -20,11 +19,6 @@ class AzureConfig:
     def get_resource_config(self, subscription_id):
         return AzureResourceServiceConfig(
             subscription_id,
-            self.get_credential_config()
-        )
-
-    def get_subscription_config(self):
-        return AzureSubscriptionServiceConfig(
             self.get_credential_config()
         )
 

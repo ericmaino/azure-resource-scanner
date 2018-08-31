@@ -2,7 +2,9 @@ from Adapters.Simulators import ServiceFactorySimulator
 from Common.Test import TestCase
 from Common import scheduler
 
-class test_scheduler(TestCase):
+
+class TestScheduler(TestCase):
+
     def test_latest_config_is_picked(self):
 
         simulated_factory = ServiceFactorySimulator()

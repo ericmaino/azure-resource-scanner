@@ -5,6 +5,7 @@ from Common.scheduler import create_tasks, read_config_from_blob
 from Adapters.Azure import AzureConfig, AzureServiceFactory
 from Common import Config
 
+
 def main(timer: azure.functions.TimerRequest):
 
     config_reader = Config()

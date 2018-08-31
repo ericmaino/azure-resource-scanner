@@ -4,9 +4,9 @@ import json
 
 
 class ResourceScanner:
-    def __init__(self, factory:ServiceFactory, outputQueue:Queue):
+    def __init__(self, factory: ServiceFactory, output_queue: Queue):
         self._factory = factory
-        self._queue = outputQueue
+        self._queue = output_queue
 
     def execute(self, message):
         subscription_id = message.get('subscriptionId')

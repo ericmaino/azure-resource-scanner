@@ -6,9 +6,9 @@ from json import dumps
 class AzureResource(Resource):
 
     def __init__(self, d: dict):
-        id = d['id']
-        self.subscription_id = ResourceExtractors.get_subscription(id)
-        self.resource_group = ResourceExtractors.get_resource_group(id)
+        resource_id = d['id']
+        self.subscription_id = ResourceExtractors.get_subscription(resource_id)
+        self.resource_group = ResourceExtractors.get_resource_group(resource_id)
         self.resource_name = d['name']
         self.resource_type = d['type']
         self.resource_location = d['location']

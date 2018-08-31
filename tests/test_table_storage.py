@@ -4,7 +4,9 @@ import uuid
 from Adapters.Simulators import ServiceFactorySimulator
 from Common.Test import TestCase
 
-class test_table_storage(TestCase):
+
+class TestTableStorage(TestCase):
+
     def test_entry_is_inserted(self):
 
         simulated_factory = ServiceFactorySimulator()
@@ -20,15 +22,14 @@ class test_table_storage(TestCase):
                 location = data['location']
 
                 # save partition and row key for access later
-                PartitionKey = location
-                RowKey= str(uuid.uuid3(uuid.NAMESPACE_DNS, data['id']))
+                partition_key = location
+                row_key = str(uuid.uuid3(uuid.NAMESPACE_DNS, data['id']))
 
                 # verify the entry was written to the table
-                retrieved_entry = None
-                retrieved_entry = storage_table.query(PartitionKey, RowKey)
+                retrieved_entry = storage_table.query(partition_key, row_key)
 
                 # verify the entry was inserted on Cosmos
-                self.assertIsNotNone(retrieved_entry,"No entry was inserted on Cosmos")
+                self.assertIsNotNone(retrieved_entry, "No entry was inserted on Cosmos")
 
                 # delete the entry for good practice
-                storage_table.delete(PartitionKey,RowKey)
+                storage_table.delete(partition_key,row_key)
