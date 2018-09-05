@@ -56,4 +56,3 @@ class ResourceServiceSimulator(ResourceService):
 
     def get_filter(self, payload) -> ResourceFilter:
         pass
-
