@@ -104,3 +104,6 @@ az functionapp config appsettings set --name <function_app> --resource-group my-
 
 ##### 8. Verify Function Configuration
 The function app should now be configured properly. You can verify the functions are loaded correctly by finding them in the Azure Portal and opening the function app resource. In order for the flow to begin, there must be a configuration file, which is explained below.
+
+##### 9. Generate Configuration File
+In order for the Resource Scanner to run, a configuration file must be generated. This configuration file is stored in an Azure Blob Storage container, and then picked up by the task scheduling function to kick off the process. This process is run locally. Follow [these steps](/GenerateConfig.md) to generate the file, at which point you should be good to start scanning :)
