@@ -1,6 +1,8 @@
 from Common.Contracts import ServiceFactory
 
-from . import AzureCosmosDb, AzureStorageQueue, AzureResourceService
+from .azure_cosmosdb import AzureCosmosDb
+from .azure_storage_queue import AzureStorageQueue
+from .azure_resource_service import AzureResourceService
 from .azure_subscription_service import AzureSubscriptionService
 from .azure_storage_container import AzureStorageContainer
 from .azure_config_generator import AzureConfigGenerator

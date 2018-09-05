@@ -46,8 +46,6 @@ class AzureResource(Resource):
     def to_dict(self):
         return {
             'id': self.id,
-            'account_id': self.account_id,
-            'group': self.resource_group,
             'name': self.name,
             'type': self.type,
             'location': self.location,

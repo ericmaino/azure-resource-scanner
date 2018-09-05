@@ -1,6 +1,6 @@
 import logging
 
-from Adapters.Azure import AzureConfig, AzureServiceFactory
+from Adapters.Azure import AzureConfig, AzureServiceFactory, AzureResource
 from Common import ResourceTagger, Config
 
 from azure.functions import QueueMessage
@@ -16,10 +16,12 @@ def parse_message(msg):
 
         logging.info(f"Found {len(resource_list)} resources to process")
 
+        resource_list = [AzureResource(resource) for resource in resource_list]
+
         return resource_list
 
 
-def main(msg : QueueMessage):
+def main(msg: QueueMessage):
     config = Config()
     azure_config = AzureConfig(config)
     factory = AzureServiceFactory(azure_config)

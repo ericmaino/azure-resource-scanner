@@ -20,8 +20,8 @@ def main(timer: azure.functions.TimerRequest):
 
     tasks = create_tasks(config)
 
-    queue_service = factory.queue(azure_config.task_queue_name)
+    task_queue = factory.queue(azure_config.task_queue_name)
 
     for task in tasks:
-        logging.warning("Pushing task %s", str(task))
-        queue_service.push(task)
+        logging.warning(f"Pushing task {task} to queue {azure_config.task_queue_name}")
+        task_queue.push(task)

@@ -25,8 +25,10 @@ class AzureResourceService(ResourceService):
         self._resource_type_apis = dict()
 
         self._knownTypes = {
-            'vm' : 'Microsoft.Compute/virtualMachines',
-            'storage' : 'Microsoft.Storage/storageAccounts'
+            'vm': 'Microsoft.Compute/virtualMachines',
+            'storage': 'Microsoft.Storage/storageAccounts',
+            'Microsoft.Compute/virtualMachines': 'Microsoft.Compute/virtualMachines',
+            'Microsoft.Storage/storageAccounts': 'Microsoft.Storage/storageAccounts'
         }
 
     def get_resources(self, filter: ResourceFilter=None):
@@ -45,12 +47,12 @@ class AzureResourceService(ResourceService):
         except Exception:
             raise NotImplementedError("The payload " + payload + " is not a supported filter")
 
-    def update_resource(self, resource):
-        api_version = self._resolve_api_for_resource_type(resource['type'])
+    def update_resource(self, resource: AzureResource):
+        api_version = self._resolve_api_for_resource_type(resource.type)
         if api_version is None:
-            raise Exception(f"Unabled to find api version to update {resource['id']}")
+            raise Exception(f"Unabled to find api version to update {resource.id}")
 
-        self._client.resources.update_by_id(resource['id'], api_version, resource)
+        self._client.resources.update_by_id(resource.id, api_version, resource.to_dict())
 
     # Internal Helper function to resolve API version to access Azure with
     def _resolve_api_for_resource_type(self, resource_type):

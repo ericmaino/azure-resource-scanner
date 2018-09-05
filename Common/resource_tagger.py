@@ -5,7 +5,7 @@ from .Contracts import Resource
 
 
 class ResourceTagger:
-    def __init__(self, factory:ServiceFactory, tags:dict, overwrite=True):
+    def __init__(self, factory: ServiceFactory, tags:dict, overwrite=True):
         self._factory = factory
         self._tags = tags
         self._overwrite = overwrite

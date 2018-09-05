@@ -14,5 +14,5 @@ def main(msg: azure.functions.QueueMessage):
     config = Config()
     azure_config = AzureConfig(config)
     factory = AzureServiceFactory(azure_config)
-    next_queue = factory.queue('AZURE_STORAGE_QUEUE_NAME')
+    next_queue = factory.queue(azure_config.payload_queue_name)
     ResourceScanner(factory, next_queue).execute(read_as_json(msg))
