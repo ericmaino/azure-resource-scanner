@@ -1,8 +1,7 @@
 import logging
 
 from Common import ResourceScanner
-from Common.Contracts import Queue
-from Adapters.Simulators import ServiceFactorySimulator, QueueSimulator
+from Adapters.Simulators import ServiceFactorySimulator
 from Common.Test import TestCase
 
 class TestScanner(TestCase):

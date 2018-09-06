@@ -53,3 +53,10 @@ def read_config_from_blob(blob_service):
         logging.error("Empty JSON returned!")
         return None
     return json.loads(json_data)
+
+
+def push_tasks_to_queue(task_queue, tasks):
+
+    for task in tasks:
+        logging.info(f"Pushing task {task} to task queue")
+        task_queue.push(task)

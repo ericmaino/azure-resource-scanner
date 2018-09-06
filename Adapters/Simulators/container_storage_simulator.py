@@ -20,7 +20,7 @@ class MockBlobStorageOutput:
 class MockBlobStorageSimulator(StorageContainer):
     def __init__(self):
 
-        config_content = '{"subscriptionId":"d36d0808-a967-4f73-9fdc-32ea232fc81d","displayName":"PELITTLE TEAM - CSE DWR"}'
+        config_content = '{"subscriptions": [{"subscriptionId": "xxxxxxx", "displayName": "yyyyyyyyy"}], "resourceTypes": [{"typeName": "Microsoft.Compute/virtualMachines"}]}'
 
         list_of_entries = []
         latest = MockBlobStorageOutput('config-2018-08-29-10-20-49.json ', config_content)
