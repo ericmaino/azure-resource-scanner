@@ -25,6 +25,8 @@ def main(msg: QueueMessage):
     config = Config()
     azure_config = AzureConfig(config)
     factory = AzureServiceFactory(azure_config)
+    table_storage = factory.table_storage()
+
     resource_tags = {
         'tag1': 'value'
     }
@@ -34,3 +36,4 @@ def main(msg: QueueMessage):
 
     for resource in resources:
         resource_tagger.execute(resource)
+        table_storage.write_entries(resource.to_dict())

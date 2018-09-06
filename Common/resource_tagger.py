@@ -1,5 +1,4 @@
 import logging
-from Common.Helpers import ResourceExtractors
 from Common.Contracts import ServiceFactory
 from .Contracts import Resource
 
